@@ -23,12 +23,14 @@ def scan_for_tcp_port(port):
     found_list = []
     for term in range(1, 255):
         if term == own_term: continue
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
-            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                ip = '.'.join([str(t) for t in split_ip] + [str(term)])
-                print ('Scanning IP ', {ip})
-                s.connect((ip, port))
-                found_list.append(ip)
+            ip = '.'.join([str(t) for t in split_ip] + [str(term)])
+            print ('Scanning IP ', {ip})
+            s.connect((ip, port))
+            found_list.append(ip)
         except (ConnectionError, OSError) as e:
             pass
+        finally:
+            s.close()
     return found_list
