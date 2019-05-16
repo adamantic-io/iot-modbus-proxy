@@ -1,5 +1,7 @@
 import network
 import modbus
+import iotfwd
+
 import pprint
 
 IPLIST_FILENAME = 'iplist.conf'
@@ -21,8 +23,12 @@ def main():
     print('IP List: ', iplist)
     for ip in iplist:
         readings = modbus.get_ws10_readings(ip, MODBUS_TCP_PORT)
-    print('Readings for ', ip, ':')
-    pprint.pprint(readings)
+        print('Readings for ', ip, ':')
+        pprint.pprint(readings)
+        payload = iotfwd.build_payload(
+            ip, readings['temperature'], readings['humidity'],
+            readings['gpsnum'], readings['lat'], readings['lon'], readings['alt'])
+        iotfwd.send_to_iot_server(payload)
 
 if __name__ == "__main__":
     main()
