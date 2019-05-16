@@ -6,11 +6,12 @@ def guess_own_ip():
     Tries to connect to Google's default DNS on port 80 and checks
     the IP of the selected network interface (according to OS routing).
     @return the IP of the current machine'''
-
-    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
         s.connect(("8.8.8.8", 80))
         return s.getsockname()[0]
-
+    finally:
+        s.close()
 
 def split_ipv4(ipstr):
     '''Splits an IP in its components
