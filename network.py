@@ -30,7 +30,7 @@ def scan_for_tcp_port(port):
             print ('Scanning IP ', {ip})
             s.connect((ip, port))
             found_list.append(ip)
-        except (ConnectionError, OSError) as e:
+        except (Exception) as e:
             pass
         finally:
             s.close()
