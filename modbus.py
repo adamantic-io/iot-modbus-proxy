@@ -5,7 +5,8 @@ from umodbus.client import tcp
 
 
 def get_ws10_readings(ip, port):
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
         sock.connect((ip, port))
         message = tcp.read_input_registers(1, 0, 80)
         response = tcp.send_message(message, sock)
@@ -29,3 +30,5 @@ def get_ws10_readings(ip, port):
             'gpslock': response[8]
         })
         return payload
+    finally:
+        sock.close()
