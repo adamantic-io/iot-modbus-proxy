@@ -26,7 +26,7 @@ def scan_for_tcp_port(port):
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 ip = '.'.join([str(t) for t in split_ip] + [str(term)])
-                print (f'Scanning IP {ip}')
+                print ('Scanning IP ', {ip})
                 s.connect((ip, port))
                 found_list.append(ip)
         except (ConnectionError, OSError) as e:

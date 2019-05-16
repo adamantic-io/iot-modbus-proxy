@@ -25,5 +25,5 @@ def build_payload(id, temp, hum, gpsnum, lat, lon, alt):
 
 def send_to_iot_server(payload):
     r = requests.post(url=IOT_SERVER_SERVICE, data=payload)
-    print(f'Sending to IOT server: status={r.status_code}, text="{r.text}"')
+    print('Sending to IOT server: status=', r.status_code, ', text=', r.text)
     return r.status_code == 200
