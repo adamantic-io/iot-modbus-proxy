@@ -11,6 +11,7 @@ def get_server_list():
     try:
         iplist = open(IPLIST_FILENAME).readlines()
         iplist = [ip.strip() for ip in iplist if ip.strip()]
+        if not iplist: raise IOError('IP List is empty')
     except IOError as fnf:
         iplist = network.scan_for_tcp_port(MODBUS_TCP_PORT)
         with open(IPLIST_FILENAME, 'w') as f:
