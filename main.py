@@ -28,7 +28,7 @@ def main():
         pprint.pprint(readings)
         payload = iotfwd.build_payload(
             ip, readings['temperature'], readings['humidity'],
-            readings['gpsnum'], readings['lat'], readings['lon'], readings['alt'])
+            readings['gpsnum'], readings['lat'], readings['lon'], readings['alt'], readings)
         iotfwd.send_to_iot_server(payload)
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ DEFAULT_COORDS = { # sligthly north of Appignano del Tronto, IT
     'Z': 194
 }
 
-def build_payload(id, temp, hum, gpsnum, lat, lon, alt):        
+def build_payload(id, temp, hum, gpsnum, lat, lon, alt, ext = {}):        
     payload = {
         "sensorId" : id,
         "X"        : lon,
@@ -19,6 +19,8 @@ def build_payload(id, temp, hum, gpsnum, lat, lon, alt):
         "t"        : temp,
         "h"        : hum
     }
+    if ext:
+        payload['ext'] = ext
     if gpsnum <= 0:
         payload.update(DEFAULT_COORDS)
     return payload
