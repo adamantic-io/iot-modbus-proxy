@@ -19,8 +19,7 @@ def build_payload(id, temp, hum, gpsnum, lat, lon, alt, ext = {}):
         "t"        : temp,
         "h"        : hum
     }
-    if ext:
-        payload['ext'] = ext
+    payload.update(ext)
     if gpsnum <= 0:
         payload.update(DEFAULT_COORDS)
     return payload
