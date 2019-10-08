@@ -16,7 +16,7 @@ def get_ws10_readings(ip, port):
             'pressure': float(response[37]) / 10,
             'windspeed_kmh': float(response[49]) / 10,
             'wind_direction': float(response[54]) / 10,
-            'precipitation': float(response[59]) / 10,
+            'precipitation': float(response[59]) / 100,
             'brightness': float(response[75]) / 10,
             'twilight': float(response[76]) / 10
         }
