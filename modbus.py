@@ -23,8 +23,8 @@ def get_ws10_readings(ip, port):
         message = tcp.read_input_registers(1, 140, 10)
         response = tcp.send_message(message, sock)
         payload.update({
-            'lon': float(response[2]) / 100,
-            'lat': float(response[3]) / 100,
+            'lon': float(response[2]) / 10,
+            'lat': float(response[3]) / 10,
             'alt': float(response[4]),
             'gpsnum': float(response[7]),
             'gpslock': float(response[8])
